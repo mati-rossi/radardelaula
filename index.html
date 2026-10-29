@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%232747a8'/%3E%3Ccircle cx='16' cy='16' r='8' fill='none' stroke='white' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='2.5' fill='white'/%3E%3C/svg%3E">
+<meta property="og:title" content="Radar del Aula">
+<meta property="og:description" content="Resumen semanal y verificado de retos virales y contenido que circula entre chicos de primaria.">
+<meta property="og:url" content="https://radardelaula.com.ar">
+<meta property="og:type" content="website">
+<meta name="color-scheme" content="light dark">
+<title>Radar del Aula</title>
+<meta name="description" content="Resumen semanal y verificado de retos virales y contenido que circula entre chicos de primaria en Argentina.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Layout: una columna tipo cuaderno escolar con renglones; filtro por grado arriba; cada alerta es una ficha con franja de riesgo */
+:root{
+  --bg:#fbfcfe; --paper:#ffffff; --ink:#1c2a4a; --muted:#5a6785; --rule:#dfe6f3; --margin:#e9b4b4;
+  --accent:#2747a8; --accent-soft:#e8edfb;
+  --high:#c0362c; --high-bg:#fbeceb; --mid:#b26a00; --mid-bg:#fdf3e2; --low:#2f7a4a; --low-bg:#e8f4ec; --info:#2747a8; --info-bg:#e8edfb;
+  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body:"Atkinson Hyperlegible", system-ui, -apple-system, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1524; --paper:#151d31; --ink:#e3e9f7; --muted:#9aa6c2; --rule:#232e48; --margin:#6b3a3a;
+  --accent:#8ea8ff; --accent-soft:#1d2849;
+  --high:#ff8a7e; --high-bg:#3a1c1b; --mid:#f2b45a; --mid-bg:#352816; --low:#7fd39e; --low-bg:#163323; --info:#8ea8ff; --info-bg:#1d2849;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1524; --paper:#151d31; --ink:#e3e9f7; --muted:#9aa6c2; --rule:#232e48; --margin:#6b3a3a;
+  --accent:#8ea8ff; --accent-soft:#1d2849;
+  --high:#ff8a7e; --high-bg:#3a1c1b; --mid:#f2b45a; --mid-bg:#352816; --low:#7fd39e; --low-bg:#163323; --info:#8ea8ff; --info-bg:#1d2849;
+  color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 48px}
+.wrap{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+header{display:flex;flex-direction:column;gap:10px;padding-left:18px;border-left:3px solid var(--margin)}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(34px,8vw,52px);line-height:1;margin:0;letter-spacing:-.02em;text-wrap:balance}
+.lede{margin:0;color:var(--muted);max-width:60ch}
+.meta{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-size:13px;padding:4px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-weight:700;font-variant-numeric:tabular-nums}
+h2{font-family:var(--display);font-weight:600;font-size:22px;margin:0;text-wrap:balance}
+.section{display:flex;flex-direction:column;gap:14px}
+.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.sum{padding:12px;border-radius:10px;display:flex;flex-direction:column;gap:2px}
+.sum b{font-family:var(--display);font-size:28px;line-height:1;font-variant-numeric:tabular-nums}
+.sum span{font-size:13px}
+.s-high{background:var(--high-bg);color:var(--high)} .s-mid{background:var(--mid-bg);color:var(--mid)} .s-low{background:var(--info-bg);color:var(--info)}
+.card{background:var(--paper);border:1px solid var(--rule);border-radius:12px;padding:16px 16px 16px 20px;position:relative;display:flex;flex-direction:column;gap:10px;min-width:0}
+.card::before{content:"";position:absolute;left:0;top:12px;bottom:12px;width:4px;border-radius:0 3px 3px 0;background:var(--sev)}
+.card.high{--sev:var(--high);--sevbg:var(--high-bg)} .card.mid{--sev:var(--mid);--sevbg:var(--mid-bg)} .card.low{--sev:var(--low);--sevbg:var(--low-bg)} .card.info{--sev:var(--info);--sevbg:var(--info-bg)}
+.card-top{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.pill{font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:3px 9px;border-radius:999px;background:var(--sevbg);color:var(--sev)}
+.ages{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.card h3{font-family:var(--display);font-weight:600;font-size:19px;margin:0;line-height:1.25;text-wrap:balance}
+.card p{margin:0}
+.keys{background:var(--bg);border:1px solid var(--rule);border-radius:8px;padding:10px 12px;font-size:15px}
+.keys strong{display:block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.keys ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:3px}
+.src{font-size:13px;color:var(--muted)}
+.src a{color:var(--accent)}
+.empty{padding:16px;border:1px dashed var(--rule);border-radius:12px;color:var(--muted);text-align:center}
+.wa{background:var(--paper);border:1px dashed var(--accent);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:12px}
+.wa pre{white-space:pre-wrap;font-family:var(--body);font-size:15px;margin:0;background:var(--bg);padding:12px;border-radius:8px;border:1px solid var(--rule);overflow-x:auto}
+button.copy{font:700 15px var(--body);background:var(--accent);color:var(--paper);border:0;border-radius:8px;padding:10px 16px;cursor:pointer;align-self:flex-start}
+button.copy:focus-visible{outline:3px solid var(--margin);outline-offset:2px}
+.helplist{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;list-style:none}
+.helplist li{padding:10px 12px;border:1px solid var(--rule);border-radius:8px;background:var(--paper)}
+.helplist .num{font-variant-numeric:tabular-nums;user-select:all;font-weight:700}
+footer{font-size:13px;color:var(--muted);border-top:1px solid var(--rule);padding-top:14px;display:flex;flex-direction:column;gap:6px}
+footer p{margin:0}
+@media (max-width:420px){.sum b{font-size:22px}}
+</style>
+<style>[hidden]{display:none!important}body{margin:0}</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Para familias de primaria · Argentina</div>
+    <h1>Radar del Aula</h1>
+    <p class="lede">Lo que circula entre chicos y puede llegar al aula, muchas veces a través de hermanos más grandes o compañeros. Solo casos verificados en fuentes serias, sin detalles de cómo se hacen los retos.</p>
+    <div class="meta">
+      <span class="chip" id="edicion">Edición 1 · 28 oct 2026</span>
+      <span class="chip">Resumen los lunes · alertas graves en el día</span>
+    </div>
+  </header>
+
+  <section class="section" aria-labelledby="h-resumen">
+    <h2 id="h-resumen">Esta semana</h2>
+    <div class="summary">
+      <div class="sum s-high"><b data-count="high">3</b><span>Riesgo alto</span></div>
+      <div class="sum s-mid"><b data-count="mid">1</b><span>Para vigilar</span></div>
+      <div class="sum s-low"><b data-count="other">2</b><span>Novedades y bulos</span></div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="h-alertas" id="alertas">
+    <h2 id="h-alertas">Alertas</h2>
+
+    <article class="card high" data-min="10" data-max="12">
+      <div class="card-top"><span class="pill">Riesgo alto</span><span class="ages">10 a 12 años</span></div>
+      <h3>"Desaparecer 48 horas"</h3>
+      <p>Reto que circula sobre todo en TikTok e invita a chicos a irse de casa y cortar el contacto con la familia durante dos días, buscando que su ausencia genere alertas. Paraguay emitió una alerta oficial el 21 de octubre y se mencionan casos en Argentina.</p>
+      <div class="keys"><strong>Puntos para tener en cuenta</strong><ul>
+        <li>El riesgo no es el video sino salir de casa sin que ningún adulto sepa dónde está el chico.</li>
+        <li>Llega por chicos más grandes con celular propio; en primaria, sobre todo por hermanos.</li>
+      </ul></div>
+      <div class="src">Fuente: <a href="https://www.ultimahora.com/ministerio-de-la-ninez-alerta-a-padres-sobre-reto-viral-de-desaparecer-48-horas" target="_blank" rel="noopener">Última Hora</a>, <a href="https://www.elcolombiano.com/tendencias/peligroso-reto-viral-desaparecer-durante-48-horas-ninos-adolecentes-AK42596262" target="_blank" rel="noopener">El Colombiano</a></div>
+    </article>
+
+    <article class="card high" data-min="9" data-max="12">
+      <div class="card-top"><span class="pill">Riesgo alto · recurrente</span><span class="ages">9 a 12 años</span></div>
+      <h3>Juegos de asfixia o "desmayo"</h3>
+      <p>Es el reto que más se copia de forma presencial, sin pantalla de por medio. Investigadores de la Universidad Austral lo señalan entre los que provocaron muertes de chicos. Suele presentarse como un "juego" entre compañeros en el recreo.</p>
+      <div class="keys"><strong>Puntos para tener en cuenta</strong><ul>
+        <li>Puede ser letal aunque se haga una sola vez y "jugando".</li>
+        <li>Señales posibles: marcas en el cuello, dolores de cabeza frecuentes, ojos enrojecidos sin explicación.</li>
+        <li>La escuela es aliada clave: es donde suele ocurrir.</li>
+      </ul></div>
+      <div class="src">Fuente: <a href="https://www.lanacion.com.ar/sociedad/alarmamante-resultado-de-un-estudio-uno-de-cada-cuatro-adolescentes-participo-al-menos-de-un-reto-nid25062026/" target="_blank" rel="noopener">La Nación</a>, <a href="https://www.infobae.com/salud/2026/04/13/retos-virales-desinformacion-y-peligro-en-la-deep-web-que-practicas-ponen-en-riesgo-la-salud-de-jovenes-y-familias-en-argentina/" target="_blank" rel="noopener">Infobae</a></div>
+    </article>
+
+    <article class="card high" data-min="6" data-max="12">
+      <div class="card-top"><span class="pill">Riesgo alto</span><span class="ages">6 a 12 años</span></div>
+      <h3>Retos con fuego o líquidos calientes</h3>
+      <p>Medios mexicanos reportaron el 20 de octubre que un nene de 9 años sufrió quemaduras graves por un reto viral. Los retos con fuego, agua hirviendo o aerosoles reaparecen cada tanto con nombres nuevos.</p>
+      <div class="keys"><strong>Puntos para tener en cuenta</strong><ul>
+        <li>Afecta a chicos más chicos que otros retos, porque se imita fácil en casa.</li>
+        <li>Los videos suelen estar editados y no muestran cuando sale mal.</li>
+      </ul></div>
+      <div class="src">Fuente: <a href="https://heraldodemexico.com.mx/mundo/2026/10/20/autoridades-alertan-por-peligroso-reto-viral-que-dejo-un-nino-de-anos-con-quemaduras-en-el-70-de-su-cuerpo-912440.html" target="_blank" rel="noopener">El Heraldo de México</a></div>
+    </article>
+
+    <article class="card mid" data-min="11" data-max="12">
+      <div class="card-top"><span class="pill">Para vigilar</span><span class="ages">11 y 12 años</span></div>
+      <h3>Influencers de odio hacia las mujeres</h3>
+      <p>La Secretaría de Educación de México alertó el 17 de octubre sobre contenido "incel" que llega a varones desde los últimos años de primaria, a través de clips cortos y memes.</p>
+      <div class="keys"><strong>Puntos para tener en cuenta</strong><ul>
+        <li>No llega como contenido explícito sino como humor o consejos de "éxito".</li>
+        <li>Puede aparecer en frases o chistes que se repiten en el aula.</li>
+      </ul></div>
+      <div class="src">Fuente: <a href="https://www.infobae.com/mexico/2026/10/17/a-quien-admiran-tus-hijos-sep-alerta-a-papas-sobre-contenido-incel-en-redes-sociales-asi-puedes-cuidarlos-en-internet/" target="_blank" rel="noopener">Infobae</a></div>
+    </article>
+
+    <article class="card info" data-min="5" data-max="12">
+      <div class="card-top"><span class="pill">Novedad</span><span class="ages">5 a 12 años</span></div>
+      <h3>Roblox: cuentas separadas por edad</h3>
+      <p>Desde junio, Roblox asigna cuentas según la edad: <b>Roblox Kids</b> (5 a 8, chat apagado por defecto y solo juegos de baja madurez) y <b>Roblox Select</b> (9 a 15). Junto con Grooming Argentina publicó una guía para familias argentinas.</p>
+      <div class="keys"><strong>Puntos para tener en cuenta</strong><ul>
+        <li>Es el juego del que más se habla en el aula, aunque el chico no juegue.</li>
+        <li>Si juega, conviene revisar la categoría de la cuenta y quién puede escribirle.</li>
+      </ul></div>
+      <div class="src">Fuente: <a href="https://www.ambito.com/tecnologia/roblox-lanzo-una-guia-familias-argentinas-contra-el-grooming-n6289809" target="_blank" rel="noopener">Ámbito</a></div>
+    </article>
+
+    <article class="card low" data-min="5" data-max="12">
+      <div class="card-top"><span class="pill">Bulo · no reenviar</span><span class="ages">Todas las edades</span></div>
+      <h3>Personajes de terror que "aparecen en videos infantiles"</h3>
+      <p>Cerca de Halloween suelen volver cadenas tipo "Momo". Son bulos: no hay evidencia de que existan, y reenviarlas en grupos de padres es lo que termina asustando a los chicos.</p>
+      <div class="keys"><strong>Puntos para tener en cuenta</strong><ul>
+        <li>Si llega una cadena así al grupo, mejor no reenviarla.</li>
+      </ul></div>
+      <div class="src">Contexto: <a href="https://foresthill.campbellusd.org/news/district-news/viral-hoax-reminds-us-watch-what-children-watch" target="_blank" rel="noopener">Campbell Union School District</a></div>
+    </article>
+  </section>
+
+  <section class="section" aria-labelledby="h-wa">
+    <h2 id="h-wa">Para compartir por WhatsApp</h2>
+    <div class="wa">
+      <pre id="wa-text">📡 *Radar del Aula* · semana del 26/10
+
+🔴 *"Desaparecer 48 horas"*: reto de TikTok que invita a chicos a irse de casa sin avisar. Alerta oficial en Paraguay, casos mencionados en Argentina.
+🔴 *Juegos de asfixia* en el recreo: siguen siendo el reto más peligroso entre 9 y 12 años.
+🔴 *Retos con fuego*: un nene de 9 años sufrió quemaduras graves en México.
+🟡 Influencers misóginos llegando a varones de 11-12.
+🔵 Roblox ya separa cuentas por edad (Kids 5-8, chat apagado).
+⚪ Si llega una cadena tipo "Momo", es bulo: no reenviar.
+
+Más info 👉 radardelaula.com.ar</pre>
+      <button type="button" class="copy" id="copy">Copiar mensaje</button>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="h-ayuda">
+    <h2 id="h-ayuda">Dónde pedir ayuda o denunciar</h2>
+    <ul class="helplist">
+      <li><b>Con Vos en la Web</b> (Ministerio de Justicia): guías y denuncia de retos peligrosos. Si ves un video, no lo compartas: denuncialo en la app y avisá a la escuela. <a href="https://www.argentina.gob.ar/justicia/convosenlaweb/situaciones/como-me-protejo-de-desafios-virales-peligrosos" target="_blank" rel="noopener">Ver guía</a></li>
+      <li><b>Grooming Argentina</b>: consultas y denuncias confidenciales por WhatsApp al <span class="num">+54 9 11 2481-1722</span></li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>Dato de contexto: un estudio de la Universidad Austral con 848 chicos de 11 a 17 años encontró que 1 de cada 4 participó en al menos un reto viral en el último año.</p>
+    <p>Radar del Aula es una iniciativa de padres, informativa y complementaria a lo que comunica cada escuela.</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  document.getElementById('copy').addEventListener('click', function(){
+    var btn=this, el=document.getElementById('wa-text'), txt=el.innerText;
+    function done(){btn.textContent='Copiado';setTimeout(function(){btn.textContent='Copiar mensaje'},2000)}
+    function fallback(){var r=document.createRange();r.selectNodeContents(el);var s=window.getSelection();s.removeAllRanges();s.addRange(r);btn.textContent='Texto seleccionado, copialo'}
+    try{navigator.clipboard.writeText(txt).then(done,fallback)}catch(e){fallback()}
+  });
+})();
+</script>
+</body>
+</html>
